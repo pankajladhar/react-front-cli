@@ -63,7 +63,19 @@ var createComponentSkeleton = function (componentName, location, baseURL){
         }
     ]
 
-    createFiles(componentDir, files, componentName, location)
+    var promise = new Promise((resolve, reject) =>{
+        try{
+            createFiles(componentDir, files, componentName, location)
+            resolve("done");
+        }
+        catch(err){
+            reject(err)
+        }
+
+    })
+
+    return promise
+    
 
 }
 module.exports = createComponentSkeleton;

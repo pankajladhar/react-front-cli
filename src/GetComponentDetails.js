@@ -22,7 +22,7 @@ var getComponentDetails = function (callback) {
         }
     ];
 
-    inquirer.prompt(questions).then(callback);
+    return inquirer.prompt(questions)
 }
 
 module.exports = getComponentDetails;
