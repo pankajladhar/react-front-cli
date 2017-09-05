@@ -1,0 +1,13 @@
+import React from 'react';
+import renderer from 'react-test-renderer';
+// import { shallow } from 'enzyme';
+import BComponent from './../index';
+
+describe('BComponent', ()=>{
+    it('renders correctly', ()=>{
+        let tree = renderer.create(
+            <BComponent  />
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+});
