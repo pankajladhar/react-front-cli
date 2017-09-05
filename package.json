@@ -1,11 +1,16 @@
 {
   "name": "seasons-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Node CLI sample",
   "main": "index.js",
   "bin": {
     "seasons-cli": "./index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pankajladhar/seasons-cli.git"
+  },
+  "homepage": "https://github.com/pankajladhar/seasons-cli",
   "author": "Pankaj Ladhar <ladharpankaj@gmail.com>",
   "license": "ISC",
   "dependencies": {
