@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 var chalk       = require('chalk');
 var figlet      = require('figlet');
-var commander = require('commander');
+var commander   = require('commander');
+var treeify     = require('treeify');
 const packageJSONFile = require('./package.json');
 
 var getComponentDetails = require('./src/GetComponentDetails');
@@ -24,13 +25,14 @@ commander
         let componentName = userEnteredComponentName.charAt(0).toUpperCase() + userEnteredComponentName.slice(1)
         let location = arguments[0].location;
         const baseURL = 'src/Components/';
-        createComponentSkeleton(componentName, location, baseURL)
-            .then(function(data){
-                console.log( chalk.yellow( figlet.textSync(data, { horizontalLayout: 'full' })));
-            })
-            .catch(function(err){
-                console.log(chalk.red(err))
-            }) 
+        
+        createComponentSkeleton(componentName, location, baseURL).then((data)=>{
+            console.log(chalk.green("\nFollowing structure has been generated--\n"));
+            console.log( treeify.asTree(data, true) );
+            console.log( chalk.yellow( figlet.textSync("done", { horizontalLayout: 'full' })));
+        });
+        
+
     }).catch(function(err){
         console.log(chalk.red(err))
     });

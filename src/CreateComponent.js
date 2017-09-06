@@ -2,37 +2,38 @@ const path = require('path');
 const fs = require('fs-extra');
 const chalk = require('chalk');
 
-var createFiles = function(dir, files, componentName, location){
-    files.forEach((file)=>{
-        let directory;
-        file.parentFolder == undefined ? directory = dir : directory = path.join(dir, file.parentFolder)
-        fs.ensureFileSync(path.join(directory, file.fileName))
-        if(file.template !="none"){
-            writeInFiles(directory, file.fileName, file.template, file.replace, componentName, location)
-        }
-    });
-}
 
-var writeInFiles = function (dirName, fileName, templateName, isReplace, componentName, location){
-    let fileContent = fs.readFileSync(path.join(__dirname, 'template', templateName), { encoding: "UTF-8" });
-    let updatedFileContent, withBaseComponentCorrection;
-    isReplace ? updatedFileContent = fileContent.replace(/BComponent/g, componentName) : updatedFileContent =fileContent;
+let writeInFiles = function (dirName, fileName, templateName, isReplace, componentName, location){
+    let templateFileContent = fs.readFileSync(path.join(__dirname, 'template', templateName), { encoding: "UTF-8" });
+    let withBaseComponentCorrection;
+    let updatedtemplateFileContent = isReplace ? templateFileContent.replace(/BComponent/g, componentName) : templateFileContent;
     
     if(location=="BaseComponents" && fileName=="index.js"){
-        withBaseComponentCorrection = updatedFileContent.replace("import './../../Base/Base.scss';", "import './../Base/Base.scss';")
+        withBaseComponentCorrection = updatedtemplateFileContent.replace("import './../../Base/Base.scss';", "import './../Base/Base.scss';")
     }
     else{
-        withBaseComponentCorrection = updatedFileContent;
+        withBaseComponentCorrection = updatedtemplateFileContent;
     }
     fs.writeFileSync(path.join(dirName, fileName), withBaseComponentCorrection, { encoding: "UTF-8" });
 }
 
+let createFiles = function(dir, files, componentName, location) {
+    return Promise.all(
+        files.map((file)=>{
+            let directory = file.parentFolder == undefined ?  dir : path.join(dir, file.parentFolder)
+            return fs.ensureFile(path.join(directory, file.fileName)).then(()=>{
+                if(file.template !="none"){
+                    writeInFiles(directory, file.fileName, file.template, file.replace, componentName, location);
+                }
+                return file.fileName;
+            })
+        })
+    )
+}
+
 var createComponentSkeleton = function (componentName, location, baseURL){ 
 
-    const componentDir = path.join('src', 'Components', location, componentName);
-
-    /** Root folder -- Folder with component name */
-    fs.ensureDirSync(componentDir);
+    const rootDir = path.join(baseURL, location, componentName);
 
     var files = [
         {
@@ -63,19 +64,24 @@ var createComponentSkeleton = function (componentName, location, baseURL){
         }
     ]
 
-    var promise = new Promise((resolve, reject) =>{
-        try{
-            createFiles(componentDir, files, componentName, location)
-            resolve("done");
-        }
-        catch(err){
-            reject(err)
-        }
+    return createFiles(rootDir, files, componentName, location)
+          .then((data)=>{
 
-    })
-
-    return promise
-    
+            var childObject = {}, rootObject ={}, testObject={}
+            
+            data.map((file)=>{
+                if(file.indexOf('Spec.js') > 0){
+                  testObject[file] = null;
+                  childObject = { '__tests__' : testObject }
+                }
+                else{
+                    childObject[file] = null
+                }
+            })
+            
+            rootObject[componentName] = childObject
+            return rootObject;  
+          })
 
 }
 module.exports = createComponentSkeleton;
