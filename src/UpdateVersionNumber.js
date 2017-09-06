@@ -3,18 +3,22 @@ const fs = require('fs-extra');
 const chalk = require('chalk');
 var runGITCommand = require('./RunGitCommand');
 
+let currentVersion, updatedVersion;
+
 const pullRebase = ['pull', '--rebase', 'origin', 'master'];
 const addPackage = ['add', 'package.json'];
 const addPackageLock = ['add', 'package-lock.json'];
 const ammendCommit = ['commit', '--amend', '--no-edit'];
+const chkLocalCommit = ['cherry', '-v'];
+const createCommit = ['commit', '-m', 'Bump up version from '+currentVersion+' to' +updatedVersion];
 
 const packageJSONFile = require(path.join(process.cwd(),'package.json'));
 const packageLockFile = require(path.join(process.cwd(),'package-lock.json'));
 
 
 var updatePackage = () => {
-    let currentVersion = packageJSONFile.version;
-    let updatedVersion = packageJSONFile.version.replace(/\d+$/, (x)=>+x+1);
+    currentVersion = packageJSONFile.version;
+    updatedVersion = packageJSONFile.version.replace(/\d+$/, (x)=>+x+1);
     packageLockFile.version = packageJSONFile.version = updatedVersion;
 
     
@@ -32,7 +36,19 @@ var updateVersionNumber = function () {
         .then((data)=> console.log(chalk.cyan(data.toString())))
         .then(()=>runGITCommand(addPackageLock, "adding lock file"))
         .then((data)=> console.log(chalk.cyan(data.toString())))
-        .then(()=>runGITCommand(ammendCommit, "amending exisiting commit"))
+        .then(()=>runGITCommand(chkLocalCommit, "Checking local commit exists"))
+        .then((data)=>{
+            return data;
+        })
+        .then((data)=>{
+            if(data.length > 0) {
+                return runGITCommand(ammendCommit, "amending exisiting commit")
+            }
+            else{
+                return runGITCommand(createCommit, "creating new commit")
+            }
+            
+        })
         .then((data)=> console.log(chalk.cyan(data.toString())))
         .then(() => 'done!!!')
 }
