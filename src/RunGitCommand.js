@@ -3,9 +3,7 @@ const { spawn } = require('child_process');
 
 var runGITCommand = function(args, commandTye){
     var promise = new Promise((resolve, reject) =>{
-        console.log(chalk.green("######################################"))    
-        console.log(chalk.green(`    ${commandTye}    `))    
-        console.log(chalk.green("######################################"))    
+        console.log(chalk.green(`${commandTye}...`))    
 
         let command = spawn('git', args);
         let stdOutData = "", stderrData="";

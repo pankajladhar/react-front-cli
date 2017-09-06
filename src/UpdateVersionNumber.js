@@ -10,7 +10,7 @@ const addPackage = ['add', 'package.json'];
 const addPackageLock = ['add', 'package-lock.json'];
 const ammendCommit = ['commit', '--amend', '--no-edit'];
 const chkLocalCommit = ['cherry', '-v'];
-const createCommit = ['commit', '-m', 'Bump up version from '+currentVersion+' to' +updatedVersion];
+const createCommit = ['commit', '-m', 'Bump up version'];
 
 const packageJSONFile = require(path.join(process.cwd(),'package.json'));
 const packageLockFile = require(path.join(process.cwd(),'package-lock.json'));
@@ -24,7 +24,7 @@ var updatePackage = () => {
     
     fs.writeFileSync(path.join(process.cwd(),'package.json'), JSON.stringify(packageJSONFile,  null, 2))
     fs.writeFileSync(path.join(process.cwd(),'package-lock.json'), JSON.stringify(packageLockFile,  null, 2))
-    console.log(chalk.cyan(`\n Version in package.json is updated to ${chalk.green(updatedVersion)} from ${chalk.red(currentVersion)} \n`))
+    console.log(chalk.cyan(`Version in package.json is updated to ${chalk.green(updatedVersion)} from ${chalk.red(currentVersion)} \n`))
 }
 
 
