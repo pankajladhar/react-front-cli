@@ -25,3 +25,17 @@ if option is not provided then `$ seasons-cli -h` will be executed.
 * `-c or --createcomponent` Creates Skeletion of component
 * `-V or --version` Outputs the version number season-cli
 * `-h or --help` Outputs usage information
+
+# Component Structure
+`$ seasons-cli -c`
+
+Following structure has been generated where `SampleComponent` is component name.
+
+```javascript
+└─ SampleComponent
+   ├─ __tests__
+   │  └─ SampleComponentSpec.js
+   ├─ Readme.md
+   ├─ SampleComponent.scss
+   └─ Settings.scss
+```
