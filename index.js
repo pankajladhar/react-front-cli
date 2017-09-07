@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var chalk = require('chalk');
+var chalk = require('chalk'); 
 var figlet = require('figlet');
 var commander = require('commander');
 var treeify = require('treeify');
