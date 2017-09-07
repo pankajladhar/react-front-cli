@@ -31,6 +31,8 @@ if option is not provided then `$ seasons-cli -h` will be executed.
 
 Following structure has been generated where `SampleComponent` is component name.
 
+![createcomponent](https://github.com/pankajladhar/seasons-cli/blob/master/src/images/createcomponent.jpg)
+
 ```javascript
 └─ SampleComponent
    ├─ __tests__
