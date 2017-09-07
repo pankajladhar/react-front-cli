@@ -12,11 +12,9 @@ const ammendCommit = ['commit', '--amend', '--no-edit'];
 const chkLocalCommit = ['cherry', '-v'];
 const createCommit = ['commit', '-m', 'Bump up version'];
 
-const packageJSONFile = require(path.join(process.cwd(),'package.json'));
-const packageLockFile = require(path.join(process.cwd(),'package-lock.json'));
-
-
 var updatePackage = () => {
+    const packageJSONFile = require(path.join(process.cwd(),'package.json'));
+    const packageLockFile = require(path.join(process.cwd(),'package-lock.json'));
     currentVersion = packageJSONFile.version;
     updatedVersion = packageJSONFile.version.replace(/\d+$/, (x)=>+x+1);
     packageLockFile.version = packageJSONFile.version = updatedVersion;
@@ -29,6 +27,7 @@ var updatePackage = () => {
 
 
 var updateVersionNumber = function () {
+    
         return runGITCommand(pullRebase, "pulling from git")
         .then((data)=> console.log(chalk.cyan(data.toString())))
         .then(updatePackage)

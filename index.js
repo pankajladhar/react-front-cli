@@ -3,8 +3,9 @@ var chalk = require('chalk');
 var figlet = require('figlet');
 var commander = require('commander');
 var treeify = require('treeify');
+var path = require("path");
 
-const packageJSONFile = require('./package.json');
+const packageJSONFile = require(path.join(__dirname, 'package.json'));
 
 var getComponentDetails = require('./src/GetComponentDetails');
 var createComponentSkeleton = require('./src/CreateComponent');
