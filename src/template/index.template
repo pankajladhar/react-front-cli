@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 //import PropTypes from 'prop-types';
 //import classnames from 'classnames';
-import './../../Base/Base.scss';
+import './../../BaseComponents/Base/Base.scss';
 import './BComponent.scss';
 
 const propTypes = {}
@@ -11,7 +11,7 @@ export default class BComponent extends PureComponent {
     render() {
         return (
             <div>
-                
+                BComponent
             </div>
         );
     }

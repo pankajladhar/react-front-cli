@@ -1,0 +1,10 @@
+<!--- Sample with out markdown, one tab space is required -->
+    <BComponent />
+
+
+<!--- Sample with out markdown -->
+
+Sample BComponent
+```js
+    <BComponent />
+```

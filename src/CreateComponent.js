@@ -9,7 +9,7 @@ let writeInFiles = function (dirName, fileName, templateName, isReplace, compone
     let updatedtemplateFileContent = isReplace ? templateFileContent.replace(/BComponent/g, componentName) : templateFileContent;
     
     if(location=="BaseComponents" && fileName=="index.js"){
-        withBaseComponentCorrection = updatedtemplateFileContent.replace("import './../../Base/Base.scss';", "import './../Base/Base.scss';")
+        withBaseComponentCorrection = updatedtemplateFileContent.replace("import './../../BaseComponents/Base/Base.scss';", "import './../Base/Base.scss';")
     }
     else{
         withBaseComponentCorrection = updatedtemplateFileContent;
@@ -22,9 +22,7 @@ let createFiles = function(dir, files, componentName, location) {
         files.map((file)=>{
             let directory = file.parentFolder == undefined ?  dir : path.join(dir, file.parentFolder)
             return fs.ensureFile(path.join(directory, file.fileName)).then(()=>{
-                if(file.template !="none"){
-                    writeInFiles(directory, file.fileName, file.template, file.replace, componentName, location);
-                }
+                writeInFiles(directory, file.fileName, file.template, file.replace, componentName, location);
                 return file.fileName;
             })
         })
@@ -49,8 +47,8 @@ var createComponentSkeleton = function (componentName, location, baseURL){
         },
         {
             fileName: "Readme.md",
-            template:"none",
-            replace: false
+            template:"Readme.template",
+            replace: true
         },
         {
             fileName: componentName + ".scss",
