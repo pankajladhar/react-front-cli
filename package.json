@@ -1,6 +1,6 @@
 {
   "name": "seasons-cli",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Node CLI sample",
   "main": "index.js",
   "bin": {
@@ -20,6 +20,7 @@
     "figlet": "^1.2.0",
     "fs-extra": "^4.0.1",
     "inquirer": "^3.2.3",
+    "semver": "^5.4.1",
     "treeify": "^1.0.1"
   }
 }

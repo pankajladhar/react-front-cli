@@ -22,7 +22,7 @@ commander
 
 if (commander.createcomponent) {
     getComponentDetails()
-        .then(function () {
+        .then(() => {
             let userEnteredComponentName = arguments[0].componentname;
 
             let componentName = userEnteredComponentName.charAt(0).toUpperCase() + userEnteredComponentName.slice(1)
@@ -30,7 +30,7 @@ if (commander.createcomponent) {
             const baseURL = 'src/Components/';
 
             createComponentSkeleton(componentName, location, baseURL).then((data) => {
-                spinner(function(){
+                spinner(() => {
                     console.log(chalk.green("\n\nFollowing structure has been generated--\n"));
                     console.log(treeify.asTree(data, true));
                     console.log(chalk.yellow(figlet.textSync("done", { horizontalLayout: 'full' })));
@@ -38,7 +38,7 @@ if (commander.createcomponent) {
             });
 
 
-        }).catch(function (err) {
+        }).catch((err) => {
             console.log(chalk.red(err))
         });
 }
