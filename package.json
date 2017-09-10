@@ -1,17 +1,17 @@
 {
-  "name": "seasons-cli",
-  "version": "1.0.6",
-  "description": "Node CLI sample",
+  "name": "react-front-cli",
+  "version": "1.0.7",
+  "description": "Node CLI utility for creating react component library",
   "main": "index.js",
   "bin": {
-    "seasons-cli": "./index.js"
+    "react-front-cli": "./index.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/pankajladhar/seasons-cli.git"
   },
   "homepage": "https://github.com/pankajladhar/seasons-cli",
-  "author": "Pankaj Ladhar <ladharpankaj@gmail.com>",
+  "author": "Pankaj Ladhar <ladharpankaj@gmail.com>, Galeel Bhasha Satthar <gbhasha@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "chalk": "^2.1.0",
