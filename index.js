@@ -22,11 +22,11 @@ commander
 
 if (commander.createcomponent) {
     getComponentDetails()
-        .then(() => {
-            let userEnteredComponentName = arguments[0].componentname;
+        .then((arguments) => {
+            let userEnteredComponentName = arguments.componentname;
 
             let componentName = userEnteredComponentName.charAt(0).toUpperCase() + userEnteredComponentName.slice(1)
-            let location = arguments[0].location;
+            let location = arguments.location;
             const baseURL = 'src/Components/';
 
             createComponentSkeleton(componentName, location, baseURL).then((data) => {
