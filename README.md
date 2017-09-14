@@ -6,18 +6,18 @@ _seasons-cli_ is a command line tool.
 To install the stable version you can use [npm](https://npmjs.org/) or [yarn](https://yarnpkg.com/en/): 
 
 ```shell
-$ npm install seasons-cli 
+$ npm install react-front-cli 
 ```
 
 ```shell
-$ yarn install seasons-cli  
+$ yarn install react-front-cli  
 ```
 
 # CLI
 ```shell
-$ seasons-cli [options]
+$ react-front-cli [options]
 ```
-if option is not provided then `$ seasons-cli -h` will be executed. 
+if option is not provided then `$ react-front-cli -h` will be executed. 
 
 
 # CLI Options
@@ -27,11 +27,11 @@ if option is not provided then `$ seasons-cli -h` will be executed.
 * `-h or --help` Outputs usage information
 
 # Component Structure
-`$ seasons-cli -c`
+`$ react-front-cli -c`
 
 Following structure has been generated where `SampleComponent` is component name.
 
-![createcomponent](https://github.com/pankajladhar/seasons-cli/blob/master/src/images/createcomponent.jpg)
+![createcomponent](https://raw.githubusercontent.com/pankajladhar/react-front-cli/master/src/images/createcomponent.jpg)
 
 ```javascript
 └─ SampleComponent
