@@ -1,5 +1,5 @@
 # Description
-_seasons-cli_ is a command line tool.
+_react-front-cli_ is a command line tool.
 
 # Installation 
 
