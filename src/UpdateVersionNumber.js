@@ -5,7 +5,7 @@ var runGITCommand = require('./RunGitCommand');
 var inquirer = require('inquirer');
 var semver = require('semver');
 
-const pullRebase = ['pull', '--rebase', 'origin', 'master'];
+const pullRebase = ['pull', '--rebase'];
 const addPackage = ['add', 'package.json'];
 const addPackageLock = ['add', 'package-lock.json'];
 const ammendCommit = ['commit', '--amend', '--no-edit'];
@@ -40,13 +40,13 @@ const updatePackage = () => {
         inquirer.prompt(questions)
             .then((option)=> {
                 const updatedVersion = semver.inc(semver.valid(currentVersion), option.version);
-                
+
                 packageLockFile.version = packageJSONFile.version = updatedVersion;
 
                 fs.writeFileSync(path.join(process.cwd(), 'package.json'), JSON.stringify(packageJSONFile, null, 2))
                 fs.writeFileSync(path.join(process.cwd(), 'package-lock.json'), JSON.stringify(packageLockFile, null, 2))
                 return `Version in package.json is updated to ${chalk.green(updatedVersion)} from ${chalk.red(currentVersion)} \n`
-            
+
             })
             .catch((err) => {return err})
     )
@@ -54,7 +54,7 @@ const updatePackage = () => {
 
 
 var updateVersionNumber = function (option) {
-    
+
         return runGITCommand(pullRebase, "pulling from git")
         .then((data)=> console.log(chalk.cyan(data.toString())))
         .then(() => updatePackage())
@@ -71,7 +71,7 @@ var updateVersionNumber = function (option) {
             else{
                 return runGITCommand(createCommit, "creating new commit")
             }
-            
+
         })
         .then((data)=> console.log(chalk.cyan(data.toString())))
         .then(() => 'done!!!')
